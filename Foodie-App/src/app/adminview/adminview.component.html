@@ -1,0 +1,360 @@
+<!-- <mat-toolbar class="mat-elevation-z8">
+  <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  Responsive side navigation
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <img
+      class="avatar mat-elevation-z8"
+      src="https://source.unsplash.com/c_GmwfHBDzk/200x200"
+    />
+
+    <h4 class="name">John Smith</h4>
+    <p class="designation">Software Engineer</p>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" routerLink="/home">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/profile">
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/about">
+      <mat-icon>info</mat-icon>
+      <span>About</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" routerLink="/help">
+      <mat-icon>help</mat-icon>
+      <span>Help</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+
+<!-- Side navigation -->
+<div class="sidenav">
+  <img class="avatar mat-elevation-z8" src="../../assets/admin.jpg" />
+
+  <h4 class="name">Welcome</h4>
+  <h4 class="name">Admin !</h4>
+
+
+  <!-- <p class="designation">ADMIN</p> -->
+
+  <hr>
+
+  <h3>First Name : {{userdetails.firstName}}</h3>
+  <h3>Last Name : {{userdetails.lastName}}</h3>
+  <h3>EmailId : {{userdetails.emailId}}</h3>
+  <h3>Street : {{userdetails.street}}</h3>
+  <h3>City : {{userdetails.city}}</h3>
+  <h3>Pincode : {{userdetails.zipCode}}</h3>
+  <h3>State : {{userdetails.state}}</h3>
+
+
+
+
+  <hr>
+  
+  
+  <button mat-raised-button color="primary" class="menu-button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1">
+    <mat-icon>add_circle</mat-icon>
+    <span>Add Restaurant</span>
+  </button>
+  
+</div>
+
+<!-- Page content -->
+<div class="main">
+
+
+  <div class="input-group ">
+    <input type="search" class="form-control " placeholder="Search" (keyup)="Filterchange($event)"
+      aria-label="Search" aria-describedby="search-addon" />
+    <span class="input-group-text border-0" id="search-addon">
+      <mat-icon>search</mat-icon>
+    </span>
+  </div>
+
+</div>
+
+<div class="table1">
+
+  <section class="table-container mat-elevation-z8" tabindex="0">
+
+    <table mat-table [dataSource]="datasource" >
+
+      <ng-container matColumnDef="restaurantId">
+        <th mat-header-cell *matHeaderCellDef> restaurantId </th>
+        <td mat-cell *matCellDef="let element" > {{element.restaurantId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="images">
+        <th mat-header-cell *matHeaderCellDef> images </th>
+        <td mat-cell *matCellDef="let element"> 
+          <img src="../../assets/{{element.restaurantName}}.jpg" alt="" id="imageTable"> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="restaurantName">
+        <th mat-header-cell *matHeaderCellDef> restaurantName </th>
+        <td mat-cell *matCellDef="let element"> {{element.restaurantName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef> location </th>
+        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" id="action">
+          <button mat-icon-button matTooltip="Edit/update restaurant" data-bs-toggle="modal"
+            data-bs-target="#exampleModalCenter" (click)="getRestaurantForEdit(element)">
+            <mat-icon class="icon">edit</mat-icon>
+          </button>
+
+
+          <button mat-icon-button matTooltip="delete restaurant" (click)="deleteRestaurantById(element.restaurantId)">
+            <mat-icon class="icon">delete</mat-icon>
+          </button>
+
+          <button mat-icon-button matTooltip="view menu" [routerLink]="['/adminMenuListview', element.restaurantId]">
+            <mat-icon> fastfood</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+  </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div id="table">
+
+    <table class="table">
+        <thead>
+          <tr id="head1">
+            <th scope="col">Restaurant Id</th>
+            <th scope="col">Image</th>
+            <th scope="col">Restaurant Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            <th scope="col">view menu</th>
+          </tr>
+        </thead>
+        <tbody> 
+          <tr *ngFor="let r of getAllRes">
+            <td>{{r.restaurantId}}</td>
+            <td><img src="../../../assets/{{r.restaurantName}}.jpg" alt=""></td>
+            <td>{{r.restaurantName}}</td>
+            <td>{{r.location}}</td>
+            <td>
+    
+              <button mat-icon-button matTooltip="Edit/update restaurant" data-bs-toggle="modal"
+                data-bs-target="#exampleModalCenter" (click)="getRestaurantForEdit(r)">
+                <mat-icon class="icon">edit</mat-icon>
+              </button>
+            </td>
+    
+            <td>
+              <button mat-icon-button matTooltip="delete restaurant" (click)="deleteRestaurantById(r.restaurantId)">
+                <mat-icon class="icon">delete</mat-icon>
+              </button>
+            </td>
+    
+            <td>
+              <button mat-icon-button matTooltip="view menu" [routerLink]="['/adminMenuListview', r.restaurantId]">
+                <mat-icon> fastfood</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+<!--Edit  Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="exampleModalLongTitle">UPDATE RESTAURANT DATA</div>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><mat-icon>close</mat-icon></span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="editRestaurantForm" (ngSubmit)="sendEditRestaurantData()">
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">RestaurantId</label>
+            <input  type="res" id="form2Example17"  class="form-control form-control-lg" matInput
+              formControlName="restaurantId" readonly/>
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">RestaurantName</label>
+            <input type="res" id="form2Example17" class="form-control form-control-lg" matInput
+              formControlName="restaurantName" />
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">Location</label>
+            <!-- <input type="res" id="form2Example17" class="form-control form-control-lg" matInput
+              formControlName="location" /> -->
+              <mat-radio-group aria-label="Select an option" class="form-control form-control-lg" for="form2Example17"
+              matInput formControlName="location">
+              <mat-radio-button value="Delhi">Delhi</mat-radio-button>
+              <mat-radio-button value="Chennai">Chennai</mat-radio-button>
+              <mat-radio-button value="Mumbai">Mumbai</mat-radio-button>
+              <mat-radio-button value="Bengaluru">Bengaluru</mat-radio-button>
+            </mat-radio-group>
+
+          </div>
+
+          <br>
+          <button mat-raised-button color="primary" data-bs-dismiss="modal" type="submit">SUBMIT</button>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Add modal -->
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="exampleModalLongTitle">ADD RESTAURANT DATA</div>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><mat-icon>close</mat-icon></span>
+        </button>
+      </div>
+
+
+      <div class="modal-body">
+
+        <form [formGroup]="addRestaurantForm" (ngSubmit)="sendNewRestaurantData()">
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">RestaurantId</label>
+            <input type="res" id="form2Example17" class="form-control form-control-lg" matInput
+              formControlName="restaurantId" />
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">RestaurantName</label>
+            <input type="res" id="form2Example17" class="form-control form-control-lg" matInput
+              formControlName="restaurantName" />
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">Location</label>
+            <!-- <input type="res" id="form2Example17" class="form-control form-control-lg" matInput
+                formControlName="location" /> -->
+            <mat-radio-group aria-label="Select an option" class="form-control form-control-lg" for="form2Example17"
+              matInput formControlName="location">
+              <mat-radio-button value="Delhi">Delhi</mat-radio-button>
+              <mat-radio-button value="Chennai">Chennai</mat-radio-button>
+              <mat-radio-button value="Mumbai">Mumbai</mat-radio-button>
+              <mat-radio-button value="Bengaluru">Bengaluru</mat-radio-button>
+            </mat-radio-group>
+
+          </div>
+          <!-- <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">Menulist</label>
+            <input type="res" id="form2Example17" class="form-control form-control-lg" matInput
+              formControlName="menulist" />
+          </div> -->
+
+          <button mat-raised-button color="primary" data-bs-dismiss="modal" type="submit">SUBMIT</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- profile modal
+<div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="exampleModalLongTitle">Profile Information</div>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><mat-icon>close</mat-icon></span>
+        </button>
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="../../assets/admin.jpg" class="img-fluid rounded-start" alt="..">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">userdetails.firstName</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+
+      </div>
+    </div>
+  </div>
+</div> -->

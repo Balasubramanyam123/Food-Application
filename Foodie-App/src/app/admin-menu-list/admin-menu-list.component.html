@@ -1,0 +1,289 @@
+<!-- Side navigation -->
+<div class="sidenav">
+  <img class="avatar mat-elevation-z8" src="../../assets/admin.jpg" />
+
+  <h4 class="name">Welcome</h4>
+  <h4 class="name">Admin !</h4>
+
+
+  <!-- <p class="designation">ADMIN</p> -->
+
+  <hr>
+
+  <h3>First Name : {{userdetails.firstName}}</h3>
+  <h3>Last Name : {{userdetails.lastName}}</h3>
+  <h3>EmailId : {{userdetails.emailId}}</h3>
+  <h3>Street : {{userdetails.street}}</h3>
+  <h3>City : {{userdetails.city}}</h3>
+  <h3>Pincode : {{userdetails.zipCode}}</h3>
+  <h3>State : {{userdetails.state}}</h3>
+
+
+
+
+  <hr>
+  
+  
+  <button mat-raised-button color="primary" class="menu-button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1">
+    <mat-icon>add_box</mat-icon>
+    <span>Add Menu to {{restName}}</span>
+  </button>
+   <br>
+
+  <button mat-raised-button color="primary" class="menu-button" routerLink="/adminview">
+    <mat-icon>arrow_back_ios</mat-icon>
+    <span>Admin Dashboard</span>
+  </button>
+  
+</div>
+
+<!-- Page content -->
+<div class="main">
+
+
+  <div class="input-group ">
+    <input type="search" class="form-control " placeholder="Search" (keyup)="Filterchange($event)"
+      aria-label="Search" aria-describedby="search-addon" />
+    <span class="input-group-text border-0" id="search-addon">
+      <mat-icon>search</mat-icon>
+    </span>
+  </div>
+
+</div>
+
+<div class="table1">
+
+  <section class="table-container mat-elevation-z8" tabindex="0">
+
+    <table mat-table [dataSource]="datasource" >
+
+      <ng-container matColumnDef="foodId">
+        <th mat-header-cell *matHeaderCellDef> foodId </th>
+        <td mat-cell *matCellDef="let element" > {{element.foodId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="images">
+        <th mat-header-cell *matHeaderCellDef> images </th>
+        <td mat-cell *matCellDef="let element"> 
+          <img src="../../assets/{{element.foodName}}.jpg" alt="" id="imageTable"> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="foodName">
+        <th mat-header-cell *matHeaderCellDef> foodName </th>
+        <td mat-cell *matCellDef="let element"> {{element.foodName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" id="action">
+          <button mat-icon-button matTooltip="Edit/update restaurant" data-bs-toggle="modal"
+            data-bs-target="#exampleModalCenter" (click)="getRestaurantForEdit(element)">
+            <mat-icon class="icon">edit</mat-icon>
+          </button>
+
+
+          <button mat-icon-button matTooltip="delete restaurant" (click)="deleteFoodItem(element.foodId)">
+            <mat-icon class="icon">delete</mat-icon>
+          </button>
+
+      
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+  </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="AdminMainview"> 
+    <button type="submit" value="user" mat-raised-button color="primary" routerLink="/adminview"> ADMIN MAINVIEW </button>
+</div>
+
+<div class="addmenulist">
+  <button  mat-raised-button   data-bs-toggle="modal" data-bs-target="#exampleModalCenter1" class="text-danger">ADD MENULIST</button>
+</div> -->
+
+  
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title" id="exampleModalLongTitle">ADD MENULIST DATA</div>
+      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"><mat-icon>close</mat-icon></span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      
+      <form [formGroup]="AddMenuLIstForm" (ngSubmit)="sendNewMenuListData()">
+         
+          
+          <br>
+    <br>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">FoodId</label>
+            <input type="res" id="form2Example17" class="form-control form-control-lg" matInput formControlName="foodId" />
+            <mat-error align="End" >
+              Valid Email is required.
+            </mat-error>
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">FoodName</label>
+            <input type="res" id="form2Example17" class="form-control form-control-lg" matInput formControlName="foodName" />
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">Quantity</label>
+            <input type="res" id="form2Example17" class="form-control form-control-lg" matInput formControlName="quantity" />
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example17">Price</label>
+            <input type="res" id="form2Example17" class="form-control form-control-lg" matInput formControlName="price" />
+          </div>
+          
+          <button mat-raised-button color="primary" data-bs-dismiss="modal" type="submit">SUBMIT</button>
+      
+        </form>
+  </div>
+</div>
+</div>
+</div>
+
+
+   
+
+    <!-- <hr> -->
+    
+
+
+
+
+
+
+  <!-- <div id="table">
+    <div id="detail">
+    </div>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Food Id</th>
+          <th scope="col">Image</th>
+          <th scope="col">Food Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of selectedRestMenu">
+          <td>{{r.foodId}}</td>
+          <td><img src="../../../assets/{{r.foodName}}.jpg" alt=""></td>
+          <td>{{r.foodName}}</td>
+          <td>{{r.quantity}}</td>
+          <td>{{r.price}}</td>
+          <td>
+  
+            <button type="button" mat-icon-button matTooltip="update menu" data-bs-toggle="modal"
+              data-bs-target="#exampleModalCenter" (click)="getRestaurantForEdit(r)">
+              <mat-icon class="icon">edit</mat-icon>
+            </button>
+          </td>
+  
+          <td>
+            <button type="button" mat-icon-button matTooltip="delete menu" (click)="deleteFoodItem(r.foodId)">
+              <mat-icon class="icon">delete</mat-icon>
+            </button>
+          </td>
+  
+          
+  
+  
+          
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+
+
+
+
+          
+<!--Edit -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title" id="exampleModalLongTitle">UPDATE RESTAURANT DATA</div>
+      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"><mat-icon>close</mat-icon></span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <form [formGroup]="editMenuListForm" (ngSubmit)="sendEditMenuListData()">
+      
+        <br>
+        <br>
+
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example17">FoodId</label>
+          <input type="res" id="form2Example17" class="form-control form-control-lg" matInput formControlName="foodId" readonly/>
+        </div>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example17">FoodName</label>
+          <input type="res" id="form2Example17" class="form-control form-control-lg" matInput formControlName="foodName" />
+        </div>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example17">Quantity</label>
+          <input type="res" id="form2Example17" class="form-control form-control-lg" matInput formControlName="quantity" />
+        </div>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example17">Price</label>
+          <input type="res" id="form2Example17" class="form-control form-control-lg" matInput formControlName="price" />
+        </div>
+        
+        <button mat-raised-button color="primary" data-bs-dismiss="modal" type="submit">SUBMIT</button>
+      </form>
+    
+  </div>
+</div>
+</div>
+</div>

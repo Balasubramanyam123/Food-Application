@@ -1,0 +1,180 @@
+<!-- <button type="submit" style="margin-left: 1%; margin-top: 10px;" mat-raised-button color="primary"
+  routerLink="/userview" background-color="black"> Back </button>
+
+
+
+<div id="table"></div>
+<div id="detail"></div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Food Id</th>
+      <th scope="col">Image</th>
+      <th scope="col">Food Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Delete</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let r of userCartItems">
+      <td>{{r.foodId}}</td>
+      <td><img src="../../../assets/{{r.foodName}}.jpg" alt=""></td>
+      <td>{{r.foodName}}</td>
+      <td>{{r.quantity}}</td>
+      <td>{{r.price}}</td>
+      <td>
+        <button class="but" mat-raised-button color="accent" type="button" (click)="deleteCartItem(r.foodId)"><mat-icon>
+            delete </mat-icon></button>
+      </td>
+</table> -->
+
+
+<nav class="navbar sticky-top navbar-dark bg-dark" *ngIf="userService.Islogidin() && userService.isUserView()">
+  <div class="container-fluid" style="color: white; justify-content: center;">
+
+
+
+    <li style="display: flex;">
+
+      <a class="nav-link active" routerLink="/profile">Profile</a>
+
+      <a class="nav-link active" routerLink="/favouriteview">favourite Restaurants</a>
+
+      <a class="nav-link active" routerLink="/favouritefoodsview">favourite Dishes</a>
+
+      <a class="nav-link active" routerLink="/cartview" style="background-color: red;">Add to Cart</a>
+
+    </li>
+
+
+  </div>
+
+</nav>
+
+
+<!-- Side navigation -->
+<div class="sidenav">
+
+ 
+  <br>
+  
+ 
+  <img class="avatar mat-elevation-z8" src="../../assets/cart.png" style="background-color: aliceblue;"/>
+
+  <h4 class="name">Shopping Cart</h4>
+
+
+
+  <!-- <p class="designation">ADMIN</p> -->
+
+  <hr>
+
+  <!-- <h3>First Name : {{userdetails.firstName}}</h3>
+  <h3>Last Name : {{userdetails.lastName}}</h3>
+  <h3>EmailId : {{userdetails.emailId}}</h3>
+  <h3>Street : </h3>
+  <h3>City : </h3>
+  <h3>Pincode : {{userdetails.zipCode}}</h3>
+  <h3>State : {{userdetails.state}}</h3> -->
+
+  <h3>Date :  {{ dateToday | date: "medium" }}</h3>
+
+  <hr>
+
+  <h3>Address : {{userdetails.street}} {{userdetails.city}}  </h3>
+
+  <hr>
+
+
+  <h3 style="display: flex; justify-content: space-between;">Delivery to {{userdetails.zipCode}} <p style="color: red; ">Free in 1-2 hour</p></h3>
+
+  <hr>
+
+
+  <h3>Total Items : {{userCartItems.length}}</h3>
+  
+
+
+
+
+  <hr>
+
+  <h3>
+Total Amount : <button class="btn btn-outline-light" style="width: 80px;  margin: 0px 50px;"> {{  getTotalCost()  }}</button>
+  </h3>
+  
+  
+  
+   <br>
+
+  
+  
+</div>
+
+<!-- Page content -->
+<div class="main">
+
+
+
+
+</div>
+
+<div class="table1">
+
+  <section class="table-container mat-elevation-z8" tabindex="0">
+
+    <table mat-table [dataSource]="datasource" >
+
+      <ng-container matColumnDef="foodId">
+        <th mat-header-cell *matHeaderCellDef> foodId </th>
+        <td mat-cell *matCellDef="let element" > {{element.foodId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="images">
+        <th mat-header-cell *matHeaderCellDef> images </th>
+        <td mat-cell *matCellDef="let element"> 
+          <img src="../../assets/{{element.foodName}}.jpg" alt="" id="imageTable"> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="foodName">
+        <th mat-header-cell *matHeaderCellDef> foodName </th>
+        <td mat-cell *matCellDef="let element"> {{element.foodName}} </td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" id="action">
+          
+
+
+          <button mat-icon-button matTooltip="delete cart item" (click)="deleteCartItem(element.foodId)">
+            <mat-icon class="icon">delete</mat-icon>
+          </button>
+
+      
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" ></tr>
+      
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+  </section>
+</div>
+
+

@@ -1,0 +1,42 @@
+<nav class="navbar sticky-top navbar-dark bg-dark">
+  <div class="container-fluid" style="color: white;">
+    <a class="nav-link active" aria-current="page" routerLink="/home">HOME</a>
+    <a class="navbar-brand" routerLink="">Foodie App</a>
+
+
+
+    <ul class="nav navbar-nav navbar-right" *ngIf="!userService.Islogidin()">
+
+      <li style="display: flex;">
+
+        <a class="nav-link active" *ngIf="!userService.Islogidin()" routerLink="/loginView">LOGIN</a>
+
+        <a class="nav-link active" *ngIf="!userService.Islogidin()" routerLink="/signupView">SIGN UP</a>
+
+        <a class="nav-link active" *ngIf="!userService.Islogidin()" routerLink="/">ABOUT</a>
+
+      </li>
+
+    </ul>
+
+
+
+    <button class="nav navbar-nav navbar-right" *ngIf="userService.Islogidin()"   (click)="logout()" mat-raised-button
+      color="primary" routerLink="/loginView">Logout
+    </button>
+
+
+  </div>
+
+</nav>
+
+<router-outlet></router-outlet>
+
+
+
+
+<!-- <nav class="navbar fixed-bottom navbar-dark bg-dark">
+  <div class="container-fluid" style="justify-content: end;color: white;">
+    Copyright © 2023, All Right Reserved to Gajarao Balu
+  </div>
+</nav> -->

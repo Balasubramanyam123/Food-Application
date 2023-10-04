@@ -1,0 +1,107 @@
+<!-- <div class="logout">
+  <button mat-raised-button color="warn" (click)="logout()" routerLink="/loginView">Logout</button>
+</div>
+
+<button type="submit" style="margin-left: 1%; margin-top: 10px;" mat-raised-button color="primary" routerLink="/userview" background-color="black"> Back  </button>
+
+
+
+      <div id="table">
+        <div id="detail">
+        </div>
+      
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Food Id</th>
+              <th scope="col">Image</th>
+              <th scope="col">Food Name</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Favorites</th>
+              <th scope="col">Add To Cart</th>
+            </tr>
+          </thead>
+          
+          
+          <tbody>
+            <tr *ngFor="let r of selectedRestMenu">
+              <td>{{r.foodId}}</td>
+              <td><img src="../../../assets/{{r.foodName}}.jpg" alt=""></td>
+              <td>{{r.foodName}}</td>
+              <td>{{r.quantity}}</td>
+              <td>{{r.price}}</td>
+
+               <td>
+                   <button mat-raised-button color="accent" (click)="addFavoFoodItemToUser(r)"><mat-icon>favorite</mat-icon></button>
+               </td> 
+
+              <td>
+                  <button mat-raised-button color="accent" (click)="addToCart(r)">Add To Cart</button>
+              </td> 
+            
+            
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      -->
+
+
+<!-- <div class="main">
+  <ul class="cards" >
+    <li class="cards_item" *ngFor="let r of selectedRestMenu" >
+      <div class="card" tabindex="0">
+        <div class="card_image"><img src="https://assets.codepen.io/652/photo-1544510808-91bcbee1df55.jpeg"
+            alt="A side view of a plate of figs and berries. "></div>
+        <div class="card_content">
+          <h2 class="card_title">{{r.foodName}} &#x2022; {{r.price}}</h2>
+          <div class="card_text">
+            <span class="note">Add To Cart</span>
+            <span class="note">Add To favourites</span>
+            
+            <p>Quantity<strong>{{r.quantity}}</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="main">
+  <ul class="cards">
+    <li class="cards_item" *ngFor="let r of selectedRestMenu">
+      <div class="card">
+        <div class="card_image"><img src="../../assets/{{r.foodName}}.jpg" alt="Image was not retreiving "></div>
+        <div class="card_content">
+          <h2 class="card_title">{{r.foodName}}     </h2>
+          <div class="card_text">
+            <p>Price : &#x20b9; {{r.price}}</p>
+            <p>Food Id : {{r.foodId}}</p>
+            <p>Quantity : {{r.quantity}}</p>
+            <div style="display: flex; justify-content: space-around;">
+              <button mat-mini-fab matTooltip="Add {{r.foodName}} to Favorites" (click)="addFavoFoodItemToUser(r)">
+                <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+              </button>
+              <button mat-raised-button color="primary" (click)="addToCart(r)">Add To Cart</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

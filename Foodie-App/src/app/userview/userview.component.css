@@ -1,0 +1,172 @@
+.container-fluid {
+  font-weight: bold;
+  /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+
+}
+
+.nav-link {
+
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 5px 40px;
+}
+
+.nav-link:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+
+.form-control-borderless {
+  border: none;
+}
+
+.form-control-borderless:hover,
+.form-control-borderless:active,
+.form-control-borderless:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400;1,900&display=swap');
+
+
+.container1{
+ 
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  padding:40px 20px;
+  align-items: center;
+
+}
+
+.card1:hover {
+  transform: scale(1.025); 
+  
+}
+
+.card1{
+  display:flex;
+  flex-direction:column;
+  width:350px;
+  margin-bottom:60px;
+}
+.card1>div{
+  box-shadow:0 15px 20px 0 rgba(0,0,0,0.5);
+}
+.card-image{
+  width:300px;
+  height:250px;
+  
+}
+.card-image>img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:bottom;
+}
+.card-text{
+  margin:-30px auto;
+  margin-bottom:-50px;
+  height:200px;
+  width:300px;
+  background-color:#1D1C20;
+  color:#fff;
+  padding:20px;
+}
+.card-meal-type{
+ 
+  font-style:italic;
+}
+.card-title{
+  font-size:2.4rem;
+  margin-bottom:20px;
+  margin-top:5px;
+}
+.card-body{
+  font-size:1.15rem;
+}
+.card-price{
+  width:80px;
+  height:80px;
+  background-color:whitesmoke;
+  color:#fff;
+  border-radius: 30%;
+  margin-left:auto;
+  
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+
+
+
+
+
+
+
+.card1 {
+  width: 350px;
+  /* height: 550px; */
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+
+.card1:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.card1:active {
+  color: #000
+}
+
+.card1:active:after {
+  background: transparent;
+}
+
+.card1:hover:before {
+  opacity: 1;
+}
+
+.card1:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+}
+
+
+
+

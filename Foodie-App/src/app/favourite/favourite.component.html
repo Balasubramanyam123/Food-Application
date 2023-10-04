@@ -1,0 +1,71 @@
+  <nav class="navbar sticky-top navbar-dark bg-dark" *ngIf="userService.Islogidin() && userService.isUserView()">
+    <div class="container-fluid" style="color: white; justify-content: center;">
+  
+  
+  
+      <li style="display: flex;">
+  
+        <a class="nav-link active" routerLink="/profile">Profile</a>
+  
+        <a class="nav-link active" routerLink="/favouriteview" style="background-color: red;">favourite Restaurants</a>
+  
+        <a class="nav-link active" routerLink="/favouritefoodsview">favourite Dishes</a>
+  
+        <a class="nav-link active" routerLink="/cartview">Add to Cart</a>
+  
+      </li>
+  
+  
+    </div>
+  
+  </nav>
+
+
+  <div class="container">
+    <br />
+    <div class="row justify-content-center">
+      
+  
+    </div>
+    <div class="container1">
+      <div *ngIf="userFavRest.length<=0">
+        <p style="color: white;">
+          No results founds
+        </p>
+      </div>
+      <div class="card1" *ngFor="let r of userFavRest">
+  
+        <div class="card-image">
+          <img
+            src="../../assets/{{r.restaurantName}}.jpg">
+        </div>
+        <div class="card-text">
+          <p class="card-meal-type">{{r.location}}</p>
+          <h2 class="card-title">{{r.restaurantName}}</h2>
+          <p class="card-body">
+  
+  
+  
+            <button mat-raised-button color="basic" [routerLink]="['/menulistview', r.restaurantId]">
+              <mat-icon>fastfood</mat-icon>
+              <span>View Menu's</span>
+            </button>
+  
+  
+          </p>
+        </div>
+        <div class="card-price">
+  
+  
+          <!-- <button  class="but" mat-raised-button color="basic" type="button"  (click)="deleteFavoRestaurantToUser(r.restaurantId)"><mat-icon> delete </mat-icon></button>  -->
+          <button mat-fab color="primary" matTooltip="delete {{r.restaurantName}} from favourite" (click)="deleteFavoRestaurantToUser(r.restaurantId)">
+            <mat-icon >delete_forever</mat-icon>
+          </button>
+  
+  
+  
+        </div>
+  
+      </div>
+    </div>
+

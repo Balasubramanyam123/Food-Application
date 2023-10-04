@@ -1,0 +1,124 @@
+<nav class="navbar sticky-top navbar-dark bg-dark" *ngIf="userService.Islogidin() && userService.isUserView()">
+  <div class="container-fluid" style="color: white; justify-content: center;">
+
+
+
+    <li style="display: flex;">
+
+      <a class="nav-link active" routerLink="/profile">Profile</a>
+
+      <a class="nav-link active" routerLink="/favouriteview">favourite Restaurants</a>
+
+      <a class="nav-link active" routerLink="/favouritefoodsview">favourite Dishes</a>
+
+      <a class="nav-link active" routerLink="/cartview">Add to Cart</a>
+
+    </li>
+
+
+  </div>
+
+</nav>
+
+
+<nav class="navbar sticky-top navbar-dark bg-dark" *ngIf="userService.Islogidin() && !userService.isUserView()">
+  <div class="container-fluid" style="color: white; justify-content: center;">
+
+
+
+    <li style="display: flex;">
+
+
+
+      <a class="nav-link active" routerLink="/adminview">Go back to Admin dashboard</a>
+
+    </li>
+
+
+  </div>
+
+</nav>
+
+<div class="container">
+  <br />
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <form class="card card-sm" style="background-color: rgb(116, 110, 110);">
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-search h4 text-body"></i>
+          </div>
+
+          <div class="col">
+            <input class="form-control form-control-lg form-control-borderless" type="search" id="search-bar"
+              placeholder="Search for Restaurant............" (keyup)="searchData()">
+          </div>
+
+          <div class="col-auto">
+            <mat-icon>search</mat-icon>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <div class="container1">
+    <div *ngIf="restaurants.length<=0">
+      <p style="color: white;">
+        No results founds
+      </p>
+    </div>
+    <div class="card1" *ngFor="let r of restaurants">
+
+      <div class="card-image">
+        <img
+          src="../../assets/{{r.restaurantName}}.jpg">
+      </div>
+      <div class="card-text">
+        <p class="card-meal-type">{{r.location}}</p>
+        <h2 class="card-title">{{r.restaurantName}}</h2>
+        <p class="card-body">
+
+
+
+          <button mat-raised-button color="basic" [routerLink]="['/menulistview', r.restaurantId]">
+            <mat-icon>fastfood</mat-icon>
+            <span>View Menu's</span>
+          </button>
+
+
+        </p>
+      </div>
+      <div class="card-price">
+
+
+        <!-- <button mat-icon-button color="warn" (click)="addFavoRestaurantToUser(r)"
+          matTooltip="Add {{r.restaurantName}} to favorite" >
+          <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" routerlink="/loginView"
+          matTooltip="Add {{r.restaurantName}} to favorite" *ngif="!userService.Islogidin()">
+          <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button> -->
+
+        <button mat-icon-button color="warn" (click)="addFavoRestaurantToUser(r)"
+          matTooltip="Add {{r.restaurantName}} to favorite" *ngIf="userService.Islogidin() && userService.isUserView()">
+          <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" routerLink="/loginView"
+          matTooltip="Please Login !!" *ngIf="!userService.Islogidin()">
+          <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" 
+          matTooltip="Admin cannot Add favorite !" *ngIf="userService.Islogidin() && !userService.isUserView()">
+          <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+
+      </div>
+
+    </div>
+  </div>
